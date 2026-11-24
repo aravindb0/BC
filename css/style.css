@@ -387,3 +387,8 @@ body.has-rest #app { padding-bottom: calc(var(--nav-h) + var(--sab) + 104px); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Daily speech card */
+.speech { border-left: 3px solid var(--crimson-hi) !important; }
+.speech-text { font-family: var(--f-body); font-size: 14.5px; line-height: 1.6; color: var(--text); font-style: italic; margin-top: 8px; text-align: left; }
+.modal-window .speech-text { max-height: 46vh; overflow: auto; }

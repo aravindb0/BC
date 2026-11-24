@@ -1,13 +1,13 @@
 {
-  "name": "ARISE System — Personal Strength Quest",
-  "short_name": "ARISE",
-  "description": "Private Solo Leveling strength system. Made for one Hunter.",
+  "name": "Black Bulls Grimoire — Strength System",
+  "short_name": "Grimoire",
+  "description": "Personal strength training system: daily holds, bodyweight power, South Indian budget diet.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#03050d",
-  "theme_color": "#03050d",
+  "background_color": "#07060a",
+  "theme_color": "#07060a",
   "categories": ["health", "fitness", "lifestyle"],
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },

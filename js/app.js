@@ -6,7 +6,7 @@
   'use strict';
 
   const STORE_KEY = 'bb_grimoire_strength_v1';
-  const TITLES = { E: 'E-Rank Hunter', D: 'D-Rank Hunter', C: 'C-Rank Hunter', B: 'B-Rank Hunter', A: 'A-Rank Hunter', S: 'S-Rank · Shadow Monarch' };
+  const TITLES = { E: 'Magic Knight Aspirant', D: 'Junior Magic Knight', C: 'Magic Knight', B: 'Senior Magic Knight', A: 'Squad Captain', S: 'Wizard King' };
   const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const DAY_SHORT = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -225,56 +225,28 @@
   /* ------------------------------------------------------------------
      Audio / haptics / wake lock
   ------------------------------------------------------------------ */
-  let actx = null, master = null, noiseBuf = null;
-  function ctx() {
-    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
-    if (actx.state === 'suspended') actx.resume();
-    if (!master) {
-      master = actx.createGain(); master.gain.value = 0.9;
-      const dl = actx.createDelay(); dl.delayTime.value = 0.17;
-      const fb = actx.createGain(); fb.gain.value = 0.32;
-      const wet = actx.createGain(); wet.gain.value = 0.28;
-      master.connect(actx.destination); master.connect(dl); dl.connect(fb); fb.connect(dl); dl.connect(wet); wet.connect(actx.destination);
-      noiseBuf = actx.createBuffer(1, actx.sampleRate * 2, actx.sampleRate);
-      const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-    }
-    return actx;
-  }
-  /* tone with optional pitch glide; the building block of every sound */
-  function beep(freq = 880, dur = 0.12, type = 'sine', vol = 0.18, when = 0, glideTo = null, detune = 0) {
+  let actx = null;
+  function beep(freq = 880, dur = 0.12, type = 'sine', vol = 0.18, when = 0) {
     if (!state.settings.sound) return;
     try {
-      const c = ctx(), o = c.createOscillator(), g = c.createGain(), t0 = c.currentTime + when;
-      o.type = type; o.frequency.setValueAtTime(freq, t0); o.detune.value = detune;
-      if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t0 + dur);
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === 'suspended') actx.resume();
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = type; o.frequency.value = freq;
+      const t0 = actx.currentTime + when;
       g.gain.setValueAtTime(0.0001, t0);
-      g.gain.exponentialRampToValueAtTime(vol, t0 + 0.012);
+      g.gain.exponentialRampToValueAtTime(vol, t0 + 0.01);
       g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
-      o.connect(g); g.connect(master); o.start(t0); o.stop(t0 + dur + 0.03);
+      o.connect(g); g.connect(actx.destination);
+      o.start(t0); o.stop(t0 + dur + 0.02);
     } catch (e) { /* audio unavailable */ }
   }
-  /* filtered noise sweep: risers, whooshes, impacts */
-  function sweep(f0, f1, dur, vol = 0.2, when = 0, q = 6, kind = 'bandpass') {
-    if (!state.settings.sound) return;
-    try {
-      const c = ctx(), s = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain(), t0 = c.currentTime + when;
-      s.buffer = noiseBuf; f.type = kind; f.Q.value = q;
-      f.frequency.setValueAtTime(f0, t0); f.frequency.exponentialRampToValueAtTime(f1, t0 + dur);
-      g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(vol, t0 + dur * 0.7); g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur + 0.05);
-      s.connect(f); f.connect(g); g.connect(master); s.start(t0); s.stop(t0 + dur + 0.1);
-    } catch (e) { /* ignore */ }
-  }
-  /* the iconic System "ding-ding" window chime */
-  const chime = (when = 0, v = 1) => { [1568, 2093].forEach((f, i) => { beep(f, 0.55, 'sine', 0.13 * v, when + i * 0.11); beep(f * 2.01, 0.3, 'sine', 0.04 * v, when + i * 0.11); }); };
   const sfx = {
-    tick: () => beep(1320, 0.05, 'square', 0.05),
-    set: () => { beep(1175, 0.18, 'sine', 0.15); beep(1760, 0.3, 'sine', 0.1, 0.06); },
-    go: () => { sweep(300, 3000, 0.3, 0.2); beep(110, 0.35, 'sawtooth', 0.16, 0.2, 55); chime(0.22, 0.8); },
-    sys: () => chime(0, 1),
-    arise: () => { beep(55, 1.6, 'sawtooth', 0.2, 0, 40, 6); beep(82, 1.4, 'square', 0.08, 0.1, 41); sweep(120, 1800, 1.1, 0.25, 0, 3); sweep(900, 80, 0.8, 0.18, 1.0, 2, 'lowpass'); chime(1.0, 1); },
-    done: () => { sweep(200, 4000, 0.45, 0.18); [523, 659, 784, 1046, 1318, 1568].forEach((f, i) => { beep(f, 0.5, 'triangle', 0.14, 0.3 + i * 0.09); beep(f / 2, 0.5, 'sine', 0.1, 0.3 + i * 0.09); }); chime(0.95, 1); },
-    level: () => { beep(65, 1.2, 'sawtooth', 0.22, 0, 32); sweep(150, 5000, 1.0, 0.28, 0, 4); [392, 523, 659, 784, 1046, 1318, 1568].forEach((f, i) => { beep(f, 0.4, 'sawtooth', 0.07, 0.9 + i * 0.07, null, -8); beep(f, 0.55, 'triangle', 0.13, 0.9 + i * 0.07, null, 8); }); chime(1.6, 1.2); },
-    speech: () => { beep(73, 1.2, 'sawtooth', 0.14, 0, 55); sweep(200, 1200, 0.8, 0.14, 0, 3); chime(0.7, 0.9); }
+    tick: () => beep(660, 0.08, 'square', 0.08),
+    go: () => beep(1046, 0.25, 'triangle', 0.2),
+    done: () => { beep(784, 0.14, 'triangle', .2); beep(988, 0.14, 'triangle', .2, .15); beep(1318, 0.3, 'triangle', .22, .3); },
+    set: () => beep(740, 0.09, 'triangle', .14),
+    level: () => [523, 659, 784, 1046, 1318].forEach((f, i) => beep(f, 0.22, 'triangle', .2, i * 0.11))
   };
   const buzz = (p) => { if (state.settings.vibrate && navigator.vibrate) { try { navigator.vibrate(p); } catch (e) { /* ignore */ } } };
 
@@ -443,7 +415,7 @@
     if (left <= 0) {
       stopRest();
       sfx.go(); buzz([200, 80, 200]);
-      toast('⚔ Rest over — arise, Hunter!');
+      toast('⚔ Rest over — next set!');
     }
   }
   function stopRest() {
@@ -1037,7 +1009,7 @@
     <section class="panel">
       <h3 class="h3">Install on your phone</h3>
       ${isStandalone ? '<p class="ok small" style="margin-top:8px">✓ Installed — you are running the app.</p>' : `
-      <p class="small muted" style="margin:8px 0 12px">Add the System to your Home Screen to run it full-screen, offline.</p>
+      <p class="small muted" style="margin:8px 0 12px">Add the Grimoire to your Home Screen to run it full-screen, offline.</p>
       <button class="btn gold block" data-action="install">📲 Install App</button>`}
     </section>
 
@@ -1052,7 +1024,7 @@
       <hr class="sep"/>
       <button class="btn ghost block" style="color:#ff8b97" data-action="reset">Reset all data</button>
     </section>
-    <p class="foot-note">ARISE System · built for one Hunter only<br/>“I alone level up.”</p>
+    <p class="foot-note">Black Bulls Grimoire · built for one Bull only<br/>“Surpass your limits.”</p>
     </div>`;
   }
   function toggleRow(label, key, on) {
@@ -1219,7 +1191,7 @@
   }
 
   window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); installEvt = e; });
-  window.addEventListener('appinstalled', () => { installEvt = null; toast('System installed!'); if (ui.tab === 'vault') render(); });
+  window.addEventListener('appinstalled', () => { installEvt = null; toast('Grimoire installed!'); if (ui.tab === 'vault') render(); });
   async function doInstall() {
     if (installEvt) {
       installEvt.prompt();
@@ -1240,7 +1212,7 @@
 
   function startOnboarding() {
     showModal(`
-      <p class="sys-tag">[ SYSTEM ] NEW PLAYER DETECTED · ARISE</p>
+      <p class="sys-tag">[ SYSTEM ] NEW PLAYER DETECTED</p>
       <h2>Awaken, Warrior</h2>
       <p class="small">Set up your Grimoire. You can change all of this later in the Vault.</p>
       <div class="stack-left stack" style="margin-top:14px">
@@ -1273,16 +1245,14 @@
     s.classList.add('out');
     try { sessionStorage.setItem('bb_splash', '1'); } catch (e) { /* ignore */ }
     setTimeout(() => s.remove(), 700);
-    sfx.arise();
     if (!state.setup) startOnboarding(); else setTimeout(maybeSpeech, 1500);
+    sfx.set();
   }
 
-  /* ------------------------------------------------------------------
-     Daily motivation speech (once per morning, plus a card on Quest tab)
-  ------------------------------------------------------------------ */
+  /* Daily motivation speech (once per morning, plus a card on Quest tab) */
   function speechCard(key) {
     const sp = SPEECHES[dowOf(key)];
-    return `<section class="panel speech"><p class="sys-tag">[ SYSTEM ] Message from the Shadow Monarch</p>
+    return `<section class="panel speech"><p class="sys-tag">[ SYSTEM ] Words of the Day</p>
       <h3 class="h3" style="margin-top:6px">${esc(sp.by)}</h3><p class="speech-text">“${esc(sp.text)}”</p></section>`;
   }
   function maybeSpeech() {
@@ -1291,10 +1261,10 @@
     if (seen === k) return;
     try { localStorage.setItem('bb_speech_day', k); } catch (e) { /* ignore */ }
     const sp = SPEECHES[dowOf(k)];
-    sfx.speech(); buzz([60, 40, 160]);
+    sfx.go(); buzz([60, 40, 160]);
     showModal(`<p class="sys-tag">[ SYSTEM ] DAILY MOTIVATION</p><h2>${esc(sp.by)}</h2>
       <p class="speech-text">“${esc(sp.text)}”</p>
-      <div class="btns"><button class="btn gold" data-action="modal-close">I will rise ➔</button></div>`);
+      <div class="btns"><button class="btn gold" data-action="modal-close">Surpass ➔</button></div>`);
   }
 
   function boot() {
