@@ -1,5 +1,5 @@
 /* =====================================================================
-   BLACK BULLS GRIMOIRE — DATA
+   ARISE SYSTEM — DATA
    Training library, weekly split, rank trials, South Indian budget diet.
    Equipment: your body + 1 pull-up bar (+ a sturdy table/chair, a wall).
    ===================================================================== */
@@ -402,12 +402,24 @@ const BUDGET_TIPS = [
 ];
 
 const QUOTES = [
-  'My magic is never giving up!',
-  'Surpass your limits, right here, right now.',
-  'Today I train. Tomorrow I am stronger.',
-  'A body forged in silence needs no spell.',
-  'Not magic — strength. Not luck — work.',
+  'I alone level up.',
+  'Weakness is a choice. Strength is a habit.',
+  'Today I train. Tomorrow the System bows.',
+  'Arise.',
+  'The gate does not open for the lazy.',
   'Rise. Arise. Repeat.',
-  'The weight does not care how you feel. Lift anyway.',
-  'Every rep is a vow to the Black Bulls.'
+  'Pain is just XP loading.',
+  'Every rep is a shadow added to your army.'
+];
+
+
+/* One speech per weekday (index 0 = Sunday). Shown once each morning + on the Quest tab. */
+const SPEECHES = [
+  { by: 'Day 1 · SUNDAY — The Vow', text: 'I was born with nothing special. No magic, no gift, no easy road. And that is exactly why I will never stop! If the world says I cannot, then I will shout louder than the world. My body is my spell, my sweat is my mana. Today I make a promise to myself and I keep it with every single rep. I WILL NOT GIVE UP!' },
+  { by: 'Day 2 · MONDAY — The Wall', text: 'Hey. Yeah, you. You feel that burn? Good. That is the wall, and most people turn around right there. You are not most people. Take one more step past the point where you wanted to quit. Then one more. Strength is not found at the start of the set, it is found at the end of it. Go beyond your limits, kid.' },
+  { by: 'Day 3 · TUESDAY — The Weak Hunter', text: 'They called me the weakest. The System did not care. It gave me a quest and I did it, again and again, until the quest became easy and the weakness became a memory. Nobody is coming to carry you. Level up alone, in silence, and let the results make the noise.' },
+  { by: 'Day 4 · WEDNESDAY — Shout It Out', text: 'My arms are shaking and I do not care! My lungs are on fire and I do not care! Because behind this pain is the version of me I promised to become. Louder! Harder! Every rep is a punch against the fear in my heart. I am not done, not even close, I am just getting warmed up!' },
+  { by: 'Day 5 · THURSDAY — The Boss Talk', text: 'Listen. Talent is overrated. A captain is not the strongest because he was born that way, he is the strongest because he kept moving when everyone else sat down. Push until your legs argue, then push until they shut up. Stand tall. Drink some water. Come back tomorrow and do it all again. That is the whole secret.' },
+  { by: 'Day 6 · FRIDAY — Double Dungeon', text: 'The first time I entered the dungeon I almost died. The hundredth time, I was the one they feared. Repetition is the real magic. Every day you show up, the gate shrinks and you grow. Today the hold will feel endless. Breathe, lock your core, and outlast it. The clock is your enemy and you are about to beat it.' },
+  { by: 'Day 7 · SATURDAY — Arise', text: 'Seven days. Seven vows. Look back at who you were when you started this week. Weaker, slower, unsure. Now look at who is standing here, sweating, still going. That is the Shadow Monarch rising. Rest tonight, eat well, sleep deep. Tomorrow the cycle begins again, and you will be even stronger. Now... ARISE!' }
 ];

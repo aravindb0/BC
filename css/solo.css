@@ -1,0 +1,38 @@
+/* ARISE SYSTEM — Solo Leveling skin. Loaded after style.css; overrides the palette. */
+:root {
+  --bg: #03050d; --bg2: #060a18; --panel: #08101f; --panel2: #0c1630;
+  --line: rgba(80, 170, 255, .32); --line-soft: rgba(140, 190, 255, .09);
+  --crimson: #2b6bff; --crimson-hi: #52b8ff; --crimson-dim: rgba(43, 107, 255, .2);
+  --gold: #a98cff; --gold-dim: rgba(169, 140, 255, .16);
+  --bone: #dfeaff; --text: #e4edff; --muted: #8497b8; --ok: #45e3c0;
+  --f-title: 'Rajdhani', 'Segoe UI', system-ui, sans-serif;
+}
+html, body { background: radial-gradient(ellipse at 50% -10%, #0b1a45 0%, #03050d 55%) fixed, #03050d; }
+h1, h2, .splash-title, .h-title { text-transform: uppercase; letter-spacing: .12em; }
+.splash-title { text-shadow: 0 0 22px rgba(82,184,255,.9), 0 0 60px rgba(43,107,255,.7); }
+.splash-title span { color: #8fd3ff; }
+.splash-clover, .brand-clover { fill: none; stroke: none; filter: drop-shadow(0 0 12px rgba(82,184,255,.95)) drop-shadow(0 0 30px rgba(120,80,255,.6)); }
+.brand-clover { filter: drop-shadow(0 0 6px rgba(82,184,255,.9)); }
+.magic-circle, .hero-bg { color: #3d8bff; }
+.panel, .modal-window, .hold-window {
+  border: 1px solid var(--line) !important;
+  box-shadow: 0 0 0 1px rgba(20,40,90,.6) inset, 0 0 22px rgba(43,107,255,.18), 0 0 2px rgba(82,184,255,.7);
+  background-image: linear-gradient(180deg, rgba(60,120,255,.07), transparent 40%);
+  backdrop-filter: blur(3px);
+}
+.sys-tag { color: #7fd0ff; text-shadow: 0 0 10px rgba(82,184,255,.9); }
+.btn.gold, .chip-btn.on { background: linear-gradient(180deg, #3d8bff, #2354d8) !important; color: #fff !important; border-color: #8fd3ff !important; box-shadow: 0 0 16px rgba(61,139,255,.7); }
+.xpbar i, .bar i, .rest-progress i { background: linear-gradient(90deg, #2b6bff, #52b8ff, #a98cff) !important; box-shadow: 0 0 10px rgba(82,184,255,.9); }
+.ring-fg { stroke: #52b8ff !important; filter: drop-shadow(0 0 8px #2b6bff); }
+#nav { background: rgba(4,8,20,.92); border-top: 1px solid var(--line); box-shadow: 0 -4px 24px rgba(43,107,255,.2); }
+#nav button.active { color: #7fd0ff; text-shadow: 0 0 10px #2b6bff; }
+.setchip.done { border-color: #52b8ff; box-shadow: 0 0 12px rgba(82,184,255,.55); }
+.big { color: #8fd3ff; text-shadow: 0 0 30px #2b6bff, 0 0 60px #6a4cff; }
+/* faint scanlines over the whole System UI */
+body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: .5;
+  background: repeating-linear-gradient(0deg, rgba(120,170,255,.025) 0 1px, transparent 1px 3px); }
+.speech { border-left: 3px solid #52b8ff !important; }
+.speech-text { font-family: var(--f-body); font-size: 14.5px; line-height: 1.6; color: var(--text); font-style: italic; margin-top: 8px; text-align: left; }
+.modal-window .speech-text { max-height: 46vh; overflow: auto; }
+@keyframes sysflicker { 0%,100% { opacity: 1 } 92% { opacity: 1 } 94% { opacity: .75 } 96% { opacity: 1 } }
+.sys-tag { animation: sysflicker 5s infinite; }

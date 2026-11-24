@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#07060a" />
+  <meta name="theme-color" content="#03050d" />
   <meta name="color-scheme" content="dark" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Grimoire" />
-  <meta name="description" content="Personal strength training system: daily holds, bodyweight power, South Indian budget diet." />
+  <meta name="apple-mobile-web-app-title" content="ARISE" />
+  <meta name="description" content="Private Solo Leveling style strength system." />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
-  <title>Black Bulls Grimoire — Strength System</title>
+  <title>ARISE System — Personal Strength Quest</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/solo.css" />
 </head>
 <body>
 
@@ -26,21 +27,19 @@
       </svg>
       <svg viewBox="-40 -40 80 80" class="splash-clover"><use href="#svg-clover"></use></svg>
     </div>
-    <h1 class="splash-title">BLACK BULLS<span>GRIMOIRE</span></h1>
-    <p class="splash-sub">[ SYSTEM ] Initiating daily training protocol…</p>
-    <p class="splash-tap">Tap to enter</p>
+    <h1 class="splash-title">ARISE<span>SYSTEM</span></h1>
+    <p class="splash-sub">[ SYSTEM ] Player detected. Loading quests…</p>
+    <p class="splash-tap">Tap to ARISE</p>
   </div>
 
   <!-- ===== SHARED SVG SYMBOLS ===== -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
       <path id="svg-leaf" d="M0 0 C-5 -4 -15 -8 -14 -19 C-13 -28 -2 -29 0 -20 C2 -29 13 -28 14 -19 C15 -8 5 -4 0 0 Z"/>
-      <g id="svg-clover">
-        <use href="#svg-leaf" transform="rotate(0)  translate(0 -2)"/>
-        <use href="#svg-leaf" transform="rotate(72) translate(0 -2)"/>
-        <use href="#svg-leaf" transform="rotate(144) translate(0 -2)"/>
-        <use href="#svg-leaf" transform="rotate(216) translate(0 -2)"/>
-        <use href="#svg-leaf" transform="rotate(288) translate(0 -2)"/>
+      <g id="svg-clover" stroke-linejoin="round">
+        <path d="M0 -34 L7 -7 L34 0 L7 7 L0 34 L-7 7 L-34 0 L-7 -7 Z" fill="#050b1c" stroke="#6cc4ff" stroke-width="1.6"/>
+        <path d="M0 -16 L5 0 L0 16 L-5 0 Z" fill="#6cc4ff" stroke="none" opacity=".9"/>
+        <circle r="3" fill="#fff" stroke="none"/>
       </g>
       <g id="svg-magic-circle" fill="none" stroke="currentColor" stroke-width="0.8">
         <circle r="96"/>
@@ -107,7 +106,7 @@
     </button>
     <button data-action="goto" data-tab="grimoire">
       <svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11"/></svg>
-      <span>Grimoire</span>
+      <span>Gate</span>
     </button>
     <button data-action="goto" data-tab="vault">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>
