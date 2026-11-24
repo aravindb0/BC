@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="75%"><stop offset="0" stop-color="#3a0714"/><stop offset=".6" stop-color="#0d070a"/><stop offset="1" stop-color="#050408"/></radialGradient>
+    <path id="leaf" d="M0 0 C-5 -4 -15 -8 -14 -19 C-13 -28 -2 -29 0 -20 C2 -29 13 -28 14 -19 C15 -8 5 -4 0 0 Z"/>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+  <g transform="translate(256 256)" fill="none" stroke="#e3b34c" stroke-width="3" opacity=".85">
+    <circle r="214"/><circle r="200" stroke-dasharray="5 11" stroke-width="2.5"/><circle r="160" stroke-width="2"/>
+    <polygon points="0,-160 94,129.5 -152.2,-49.4 152.2,-49.4 -94,129.5" stroke-width="2" opacity=".7"/>
+  </g>
+  <g transform="translate(256 262) scale(6.2)" fill="#0a090c" stroke="#ff3347" stroke-width="1.5" stroke-linejoin="round" filter="url(#glow)">
+    <use href="#leaf" transform="rotate(0) translate(0 -2)"/><use href="#leaf" transform="rotate(72) translate(0 -2)"/><use href="#leaf" transform="rotate(144) translate(0 -2)"/><use href="#leaf" transform="rotate(216) translate(0 -2)"/><use href="#leaf" transform="rotate(288) translate(0 -2)"/>
+  </g>
+</svg>
