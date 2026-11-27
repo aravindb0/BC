@@ -392,3 +392,16 @@ body.has-rest #app { padding-bottom: calc(var(--nav-h) + var(--sab) + 104px); }
 .speech { border-left: 3px solid var(--crimson-hi) !important; }
 .speech-text { font-family: var(--f-body); font-size: 14.5px; line-height: 1.6; color: var(--text); font-style: italic; margin-top: 8px; text-align: left; }
 .modal-window .speech-text { max-height: 46vh; overflow: auto; }
+
+/* exercise pictures */
+.ex-pic { margin: 8px 0 2px; border-radius: 10px; background: var(--panel2); border: 1px solid var(--line-soft); }
+.ex-pic:empty { display: none; }
+.pic { display: block; width: 100%; height: 110px; fill: none; stroke: var(--gold); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.pic .hd { fill: var(--panel2); }
+.pic .gr, .pic .dc { stroke: rgba(255,255,255,.28); stroke-width: 1.6; }
+.pic .dc { fill: rgba(255,255,255,.06); }
+@keyframes picA { 0%, 38% { opacity: 1; } 55%, 100% { opacity: 0; } }
+@keyframes picB { 0%, 38% { opacity: 0; } 55%, 100% { opacity: 1; } }
+.pic.anim .fr.a { animation: picA 2.6s ease-in-out infinite; }
+.pic.anim .fr.b { animation: picB 2.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .pic.anim .fr.a, .pic.anim .fr.b { animation: none; } .pic.anim .fr.b { opacity: 0; } }

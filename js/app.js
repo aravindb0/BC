@@ -94,7 +94,7 @@
     const day = PLAN[dowOf(key)];
     const wk = weekInfo(key);
     const exercises = day.ids.map((id) => {
-      const ex = EX[id];
+      const ex = Object.assign({}, EX[id], (day.ov && day.ov[id]) || {});
       const li = levelIdx(id);
       const sets = wk.deload ? Math.max(2, ex.sets - 1) : ex.sets;
       const target = wk.deload ? ex.base : ex.base + ex.step * (wk.bp + Math.min(wk.block, 3));
@@ -575,7 +575,7 @@
       const big = v ? (isHold ? `${v}s` : '✓') : (isHold ? `▶ ${e.target}s` : e.target);
       chips += `<button class="setchip ${v ? 'done' : ''} ${isHold && !v ? 'hold-go' : ''}" data-action="set" data-ex="${e.id}" data-i="${i}" aria-label="${esc(e.name)} ${label}"><small>${label}</small><span>${big}</span></button>`;
     }
-    const unit = isHold ? 'sec hold' : (e.ex.perSide ? 'reps / side' : 'reps');
+    const unit = e.ex.label ? e.ex.label : isHold ? 'sec hold' : (e.ex.perSide ? 'reps / side' : 'reps');
     const best = rec.best && rec.best[e.id] ? rec.best[e.id] : '';
     const hint = complete && !wk.deload && wk.bp >= 2 && e.li < maxLi
       ? `<div class="rankup-hint">⚔ Every set cleared at peak target. Ready to rank up to <b>${esc(e.ex.levels[e.li + 1])}</b>?</div>` : '';
@@ -589,7 +589,8 @@
           <p class="ex-muscle">${esc(e.ex.muscle)}</p>
         </div>
       </div>
-      <div class="target"><span class="tv">${e.sets} × ${e.target}${isHold ? 's' : ''}${e.ex.perSide ? ' / side' : ''}</span><span class="small muted">${unit}${wk.deload ? ' · deload' : ''}</span></div>
+      <div class="ex-pic">${typeof picSVG === 'function' ? picSVG(e.id, e.li) : ''}</div>
+      <div class="target"><span class="tv">${e.ex.label ? e.target + ' min' : `${e.sets} × ${e.target}${isHold ? 's' : ''}${e.ex.perSide ? ' / side' : ''}`}</span><span class="small muted">${unit}${wk.deload ? ' · deload' : ''}</span></div>
       <div class="sets">${chips}</div>
       ${hint}
       <div class="ex-foot">

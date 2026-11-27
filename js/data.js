@@ -225,51 +225,95 @@ const EX = {
   }
 };
 
+/* ---------------- 6-DAY GREEK-GOD PROGRAM: extra movements + tuned targets ---------------- */
+Object.assign(EX, {
+  inclinepush: { name: 'Incline Pushup', cat: 'push', type: 'reps', sets: 3, base: 12, step: 2, rest: 75, start: 0,
+    muscle: 'Chest · Front Delts · Triceps', cue: 'Hands on a sturdy table or counter, body one straight line. Chest to the edge, push away.',
+    levels: ['Incline Pushup (high table)', 'Incline Pushup (low bench / chair)', 'Incline Pushup (low step, 3s down)'] },
+  kneepush: { name: 'Knee Pushup', cat: 'push', type: 'reps', sets: 3, base: 8, step: 2, rest: 75, start: 0,
+    muscle: 'Chest · Triceps · Core', cue: 'Straight line from knees to head. Lower for 3 seconds, press up without sagging the hips.',
+    levels: ['Knee Pushup', 'Knee Pushup (3s down)', 'Negative Pushup (4s down from toes)'] },
+  pushtop: { name: 'Pushup Top Hold', cat: 'push', type: 'hold', unit: 'sec', sets: 3, base: 20, step: 8, rest: 60, start: 0,
+    muscle: 'Shoulders · Chest · Core', cue: 'Arms locked, push the floor away, glutes and abs tight. Do not train to failure.',
+    levels: ['Pushup Top Hold', 'Feet-Elevated Top Hold'] },
+  pushhalf: { name: 'Pushup Halfway Hold', cat: 'push', type: 'hold', unit: 'sec', sets: 2, base: 10, step: 4, rest: 60, start: 0,
+    muscle: 'Chest · Triceps · Core', cue: 'Lower until elbows reach 90° and freeze. Ribs tight, hips level.',
+    levels: ['Halfway Hold (knees)', 'Halfway Hold (toes)', 'Halfway Hold (feet elevated)'] },
+  assist: { name: 'Assisted Pull-Up', cat: 'pull', type: 'reps', sets: 3, base: 4, step: 1, rest: 90, start: 0,
+    muscle: 'Lats · Biceps · Upper Back', cue: 'Feet on a chair or a resistance band for help. Pull with the back, use as little leg as possible.',
+    levels: ['Assisted Pull-Up (chair / band)', 'Slow Assisted Pull-Up (3s down)', 'Strict Pull-Up'] },
+  negpull: { name: 'Negative Pull-Up', cat: 'pull', type: 'reps', sets: 2, base: 2, step: 1, rest: 120, start: 0,
+    muscle: 'Lats · Biceps · Grip', cue: 'Step up so your chin is over the bar, then lower yourself for 4 slow seconds.',
+    levels: ['Negative Pull-Up (4s down)', 'Negative Pull-Up (6s down)', 'Negative Pull-Up (8s down)'] },
+  ytraise: { name: 'Prone Y-T Raise', cat: 'pull', type: 'reps', sets: 2, base: 10, step: 2, rest: 60, start: 0,
+    muscle: 'Rear Delts · Lower Traps · Posture', cue: 'Lie face down, thumbs up. Lift arms into a Y, then a T, squeezing the shoulder blades. No neck cranking.',
+    levels: ['Prone Y-T Raise', 'Prone Y-T Raise (2s hold)', 'Prone Y-T Raise (light backpack)'] },
+  wallslide: { name: 'Wall Slide', cat: 'mobility', type: 'reps', sets: 3, base: 12, step: 2, rest: 30, start: 0,
+    muscle: 'Shoulder Mobility · Lower Traps', cue: 'Back, elbows and wrists on the wall. Slide up to a Y and down, slow and controlled.',
+    levels: ['Wall Slide', 'Wall Slide (2s pause at top)'] },
+  throtate: { name: 'Thoracic Rotation', cat: 'mobility', type: 'reps', sets: 2, base: 10, step: 0, rest: 20, start: 0, perSide: true,
+    muscle: 'Upper Back · Posture', cue: 'On all fours, hand behind head. Rotate elbow to the ceiling, follow it with your eyes.',
+    levels: ['Thoracic Rotation'] },
+  hipflex: { name: 'Hip Flexor Stretch', cat: 'mobility', type: 'hold', unit: 'sec', sets: 2, base: 30, step: 0, rest: 15, start: 0, perSide: true,
+    muscle: 'Hip Flexors · Quads', cue: 'Half-kneeling, tuck the pelvis, squeeze the back glute, shift forward gently.',
+    levels: ['Half-Kneeling Hip Flexor Stretch', 'Hip Flexor Stretch + Overhead Reach'] },
+  doorway: { name: 'Chest Doorway Stretch', cat: 'mobility', type: 'hold', unit: 'sec', sets: 2, base: 30, step: 0, rest: 15, start: 0,
+    muscle: 'Chest · Front Delts', cue: 'Forearm on the doorframe, elbow at shoulder height. Step through until you feel the chest open.',
+    levels: ['Chest Doorway Stretch'] },
+  shouldermob: { name: 'Shoulder Mobility', cat: 'mobility', type: 'reps', label: 'minutes', sets: 1, base: 5, step: 0, rest: 0, start: 0,
+    muscle: 'Shoulders · Upper Back', cue: 'Arm circles, shoulder dislocates with a towel, cross-body swings. Slow, no pain.',
+    levels: ['Shoulder Mobility Flow'] },
+  walk: { name: 'Brisk Walking', cat: 'mobility', type: 'reps', label: 'minutes', sets: 1, base: 30, step: 0, rest: 0, start: 0,
+    muscle: 'Heart · Legs · Fat Loss', cue: 'Fast enough that talking is slightly hard. Moderate intensity, tall posture, swing the arms.',
+    levels: ['Brisk Walk'] },
+  mtclimb: { name: 'Slow Mountain Climber', cat: 'core', type: 'reps', sets: 2, base: 20, step: 4, rest: 45, start: 0,
+    muscle: 'Core · Shoulders · Hip Flexors', cue: 'High plank, drive one knee to the chest at a time. Slow and controlled, hips low.',
+    levels: ['Slow Mountain Climber', 'Tempo Mountain Climber', 'Cross-Body Mountain Climber'] },
+  bearcrawl: { name: 'Bear Crawl', cat: 'core', type: 'hold', unit: 'sec', sets: 3, base: 15, step: 3, rest: 45, start: 0,
+    muscle: 'Shoulders · Core · Legs', cue: 'Knees an inch off the floor, back flat. Crawl opposite hand and foot together.',
+    levels: ['Bear Crawl', 'Bear Crawl (backward too)'] },
+  fullstretch: { name: 'Full Body Stretching', cat: 'mobility', type: 'reps', label: 'minutes', sets: 1, base: 10, step: 0, rest: 0, start: 0,
+    muscle: 'Whole Body Recovery', cue: 'Reach overhead, fold forward, hips, hamstrings, chest, shoulders. Breathe slowly.',
+    levels: ['Full Body Stretch'] }
+});
+/* Targets from the program: holds build 20→90 (plank), etc. */
+EX.pushup.start = 0; EX.pushup.levels[0] = 'Knee / Negative Pushup (work toward Standard)';
+Object.assign(EX.plank, { base: 25, step: 13 });
+Object.assign(EX.wallsit, { base: 25, step: 13 });
+Object.assign(EX.sideplank, { base: 20, step: 5 });
+Object.assign(EX.hollow, { base: 15, step: 6 });
+Object.assign(EX.superman, { base: 20, step: 5 });
+Object.assign(EX.deadhang, { base: 15, step: 9 });
+Object.assign(EX.scap, { base: 6, step: 1 });
+
 /* ---------------- WEEKLY SPLIT (every day trains the whole body's
    needs; each day has its own focus + 2-4 HOLDS) ---------------- */
 const PLAN = {
-  1: { // Monday
-    key: 'push', icon: '⚔', title: 'Push Power',
-    sub: 'Chest · Shoulders · Triceps + Core Holds',
+  1: { key: 'push', icon: '⚔', title: 'Push Power', sub: 'Chest · Shoulders · Triceps',
     quote: 'Pushing past the limit is where Asta lives.',
-    ids: ['pushup', 'pike', 'dips', 'handstand', 'plank', 'hollow']
-  },
-  2: { // Tuesday
-    key: 'pull', icon: '🗡', title: 'Pull Power',
-    sub: 'Back · Biceps · Grip Holds',
+    ids: ['inclinepush', 'kneepush', 'pike', 'pushtop', 'pushhalf', 'plank'] },
+  2: { key: 'pull', icon: '🗡', title: 'Pull Power', sub: 'Back · Lats · Biceps',
     quote: 'A strong back carries every spell.',
-    ids: ['pullup', 'row', 'scap', 'deadhang', 'chinhold', 'superman']
-  },
-  3: { // Wednesday
-    key: 'legs', icon: '🔥', title: 'Leg Day',
-    sub: 'Quads · Glutes · Calves + Stance Holds',
+    ids: ['deadhang', 'scap', 'assist', 'negpull', 'superman', 'ytraise'], ov: {} },
+  3: { key: 'legs', icon: '🔥', title: 'Leg Day', sub: 'Legs · Glutes · Abs',
     quote: 'Roots deep as a Black Bull.',
-    ids: ['squat', 'lunge', 'bridge', 'calf', 'wallsit', 'horse']
-  },
-  4: { // Thursday
-    key: 'hold', icon: '🗿', title: 'Iron Statue — Hold Day',
-    sub: 'Full-Body Isometric Strength',
-    quote: 'Stillness under tension forges steel.',
-    ids: ['lsit', 'pushbottom', 'chinhold', 'wallsit', 'hollow', 'sideplank', 'deepsquat']
-  },
-  5: { // Friday
-    key: 'upper', icon: '⚡', title: 'Upper Strength',
-    sub: 'Pull + Push Superset · Abs · Side Hold',
+    ids: ['squat', 'lunge', 'bridge', 'calf', 'wallsit', 'deadbug', 'sideplank'],
+    ov: { squat: { sets: 3, base: 12, step: 2 }, bridge: { base: 15, step: 2 }, calf: { base: 20, step: 3 }, deadbug: { base: 10, step: 2 } } },
+  4: { key: 'mobility', icon: '🌀', title: 'Posture & Mobility', sub: 'Slow, controlled, pain-free',
+    quote: 'Stillness under control forges steel.',
+    ids: ['catcow', 'wallslide', 'birddog', 'throtate', 'hipflex', 'doorway', 'deepsquat', 'shouldermob'],
+    ov: { catcow: { base: 12 }, birddog: { sets: 3, base: 10 }, deepsquat: { base: 20, step: 5 } } },
+  5: { key: 'upper', icon: '⚡', title: 'Upper Body & V-Taper', sub: 'Shoulders · Lats · Core',
     quote: 'Chin up. Elbows tight. Never give up.',
-    ids: ['chinup', 'closepush', 'row', 'dips', 'hangknee', 'sideplank']
-  },
-  6: { // Saturday
-    key: 'lower', icon: '🌋', title: 'Lower & Core',
-    sub: 'Single-Leg Strength · Posterior Chain · Core Holds',
+    ids: ['inclinepush', 'pushup', 'pike', 'scap', 'deadhang', 'hollow', 'plank'],
+    ov: { pushup: { sets: 3, base: 6, step: 1 }, scap: { base: 8, step: 1 }, deadhang: { sets: 2, base: 20, step: 8 }, plank: { sets: 2, base: 30, step: 12 } } },
+  6: { key: 'lower', icon: '🌋', title: 'Athletic Conditioning', sub: 'Full body · Moderate intensity',
     quote: 'Balance is power.',
-    ids: ['split', 'rdl', 'bridge', 'calf', 'lungehold', 'legraise', 'plank']
-  },
-  0: { // Sunday
-    key: 'recover', icon: '🌿', title: 'Recovery Ritual',
-    sub: 'Mobility · Gentle Holds · Easy Walk',
+    ids: ['walk', 'squat', 'mtclimb', 'bearcrawl', 'deadhang', 'fullstretch'],
+    ov: { squat: { sets: 2, base: 15, step: 2 }, deadhang: { sets: 2, base: 15, step: 5 } } },
+  0: { key: 'recover', icon: '🌿', title: 'Complete Rest', sub: 'Recover · sleep 7–9 h · optional easy walk',
     quote: 'Muscles are built while you rest.',
-    ids: ['catcow', 'wgs', 'deepsquat', 'deadhang', 'couch', 'birddog']
-  }
+    ids: ['walk'], ov: { walk: { base: 20 } } }
 };
 
 /* Warm-up ritual (5 min) */

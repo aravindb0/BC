@@ -1,7 +1,7 @@
 /* Offline cache for Black Bulls Grimoire. Bump VERSION when you change any file. */
-const VERSION = 'bb-grimoire-v2';
+const VERSION = 'bb-grimoire-v3';
 const ASSETS = [
-  './', './index.html', './manifest.webmanifest', './css/style.css', './js/data.js', './js/app.js',
+  './', './index.html', './manifest.webmanifest', './css/style.css', './js/data.js', './js/pics.js', './js/app.js',
   './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png', './icons/apple-touch-icon.png',
   './fonts/cinzel-latin-600-normal.woff2', './fonts/cinzel-latin-800-normal.woff2',
   './fonts/rajdhani-latin-500-normal.woff2', './fonts/rajdhani-latin-600-normal.woff2', './fonts/rajdhani-latin-700-normal.woff2',
